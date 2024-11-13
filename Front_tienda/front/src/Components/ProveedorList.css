@@ -1,0 +1,78 @@
+/* src/components/ProveedorList.css */
+
+/* Contenedor principal de la lista */
+.proveedor-list-container {
+    background-color: #fafafa;
+    border-radius: 8px;
+    padding: 20px;
+    width: 500px;
+    margin: 20px auto;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Título de la lista */
+.list-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #333;
+}
+
+/* Lista de proveedores */
+.proveedor-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.proveedor-item {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Información del proveedor */
+.proveedor-info {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Contenedor de los botones */
+.proveedor-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* Estilo de los botones */
+.btn-edit, .btn-delete {
+    padding: 8px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Botón de editar */
+.btn-edit {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-edit:hover {
+    background-color: #218838;
+}
+
+/* Botón de eliminar */
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+}
