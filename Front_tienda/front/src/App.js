@@ -1,39 +1,22 @@
 // src/App.js
-import React, { useState } from 'react';
+import React, { Fragment } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ProveedorList from './Components/ProveedorList';
 import ProveedorForm from './Components/ProveedorForm';
+import Login from './Components/Login';
 
 function App() {
-    const [selectedId, setSelectedId] = useState(null);
-    const [isFormVisible, setIsFormVisible] = useState(false);
-
-    const handleEdit = (id) => {
-        setSelectedId(id);
-        setIsFormVisible(true);
-    };
-
-    const handleSave = () => {
-        setSelectedId(null);
-        setIsFormVisible(false);
-    };
-
-    const handleCancel = () => {
-        setSelectedId(null);
-        setIsFormVisible(false);
-    };
-
     return (
-        <div className="App">
-            <h1>Gestión de Proveedores</h1>
-            {isFormVisible ? (
-                <ProveedorForm selectedId={selectedId} onSave={handleSave} onCancel={handleCancel} />
-            ) : (
-                <>
-                    <button onClick={() => setIsFormVisible(true)}>Agregar Proveedor</button>
-                    <ProveedorList onEdit={handleEdit} />
-                </>
-            )}
-        </div>
+        <Fragment>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<Login />} />
+                    <Route path="/proveedoresForm" element={<ProveedorForm />} />
+                    <Route path="/proveedoresForm/:id" element={<ProveedorForm />} />
+                    <Route path="/home" element={<ProveedorList />} />
+                </Routes>
+            </Router>
+        </Fragment>
     );
 }
 

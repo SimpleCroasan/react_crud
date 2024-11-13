@@ -1,9 +1,12 @@
 // src/components/ProveedorForm.js
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { createProveedor, getProveedorById, updateProveedor } from '../Services/proveedorService';
 import './Proveedor.css';
 
-const ProveedorForm = ({ selectedId, onSave, onCancel }) => {
+const ProveedorForm = () => {
+    const { id } = useParams();  // Obtiene el ID desde la URL
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         ciudad: '',
         direccion: '',
@@ -13,10 +16,10 @@ const ProveedorForm = ({ selectedId, onSave, onCancel }) => {
     });
 
     useEffect(() => {
-        if (selectedId) {
-            getProveedorById(selectedId).then(data => setFormData(data));
+        if (id) {
+            getProveedorById(id).then(data => setFormData(data));
         }
-    }, [selectedId]);
+    }, [id]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -28,17 +31,17 @@ const ProveedorForm = ({ selectedId, onSave, onCancel }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (selectedId) {
-            await updateProveedor(selectedId, formData);
+        if (id) {
+            await updateProveedor(id, formData);
         } else {
             await createProveedor(formData);
         }
-        onSave();
+        navigate('/home');
     };
 
     return (
         <form onSubmit={handleSubmit} className="form-container">
-            <div className="form-group">
+              <div className="form-group">
                 <label htmlFor="ciudad">Ciudad:</label>
                 <input type="text" id="ciudad" name="ciudad" value={formData.ciudad} onChange={handleChange} className="form-input" />
             </div>
@@ -57,10 +60,10 @@ const ProveedorForm = ({ selectedId, onSave, onCancel }) => {
             <div className="form-group">
                 <label htmlFor="nit">NIT:</label>
                 <input type="text" id="nit" name="nit" value={formData.nit} onChange={handleChange} className="form-input" />
-            </div>
+            </div>  
             <div className="form-buttons">
                 <button type="submit" className="btn-submit">Guardar</button>
-                <button type="button" onClick={onCancel} className="btn-cancel">Cancelar</button>
+                <button type="button" onClick={() => navigate('/home')} className="btn-cancel">Cancelar</button>
             </div>
         </form>
     );
